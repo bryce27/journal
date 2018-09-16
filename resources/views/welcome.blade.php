@@ -13,7 +13,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="bg-teal-lightest font-sans font-normal antialiased">
+<body class="bg-blue-lightest font-sans font-normal antialiased">
     <div class="flex flex-col">
         @if(Route::has('login'))
             <div class="absolute pin-t pin-r mt-4 mr-4">
@@ -32,9 +32,9 @@
                     <h1 class="text-grey-darker text-center font-thin tracking-wide text-5xl mb-6">
                         {{ config('app.name', 'Laravel') }}
                     </h1>
-                    <ul class="list-reset">
+                    <!-- <ul class="list-reset">
                         <li class="inline pr-8">
-                            <a href="https://laravel.com/docs" class="no-underline hover:underline text-sm font-normal text-teal-darker uppercase" title="Documentation">Documentation</a>
+                            <a href="https://laravel.com/docs" class="no-underline hover:underline text-sm font-normal text-teal-darker uppercase" title="Documentation">How it works</a>
                         </li>
                         <li class="inline pr-8">
                             <a href="https://laracasts.com" class="no-underline hover:underline text-sm font-normal text-teal-darker uppercase" title="Laracasts">Laracasts</a>
@@ -51,7 +51,7 @@
                         <li class="inline pr-8">
                             <a href="https://github.com/laravel/laravel" class="no-underline hover:underline text-sm font-normal text-teal-darker uppercase" title="GitHub">GitHub</a>
                         </li>
-                    </ul>
+                    </ul> -->
                 </div>
             </div>
         </div>
