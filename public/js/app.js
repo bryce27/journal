@@ -12076,6 +12076,7 @@ window.Vue = __webpack_require__(10);
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('example-component', __webpack_require__(38));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('comments-manager', __webpack_require__(41));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('review-manager', __webpack_require__(63));
 
 
 
@@ -33194,9 +33195,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     created: function created() {
         var d = new Date();
         this.date = d.toISOString();
-        console.log('first time: ', this.date);
-        //this.fetchComments(d.toISOString())
-        //this.todays_date = this.date
     },
 
     data: function data() {
@@ -33218,7 +33216,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (this.todays_date == '') {
                     this.todays_date = new_val;
                 }
-                console.log('new date: ', new_val);
                 this.fetchComments(new_val);
             }
         }
@@ -43079,6 +43076,387 @@ module.exports = function (css) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 62 */,
+/* 63 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(4)
+/* script */
+var __vue_script__ = __webpack_require__(64)
+/* template */
+var __vue_template__ = __webpack_require__(65)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/ReviewManager.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0606934c", Component.options)
+  } else {
+    hotAPI.reload("data-v-0606934c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 64 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CommentItem__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CommentItem___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__CommentItem__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        user: {
+            required: true,
+            type: Object
+        }
+    },
+    components: {
+        comment: __WEBPACK_IMPORTED_MODULE_0__CommentItem___default.a
+    },
+    created: function created() {
+        var d = new Date();
+        this.date = d.toISOString();
+    },
+
+    data: function data() {
+        return {
+            date: '',
+            todays_date: '',
+            comments: [],
+            data: {
+                body: ''
+            },
+            state: '',
+            loading: true
+        };
+    },
+    watch: {
+        date: function date(new_val, old_val) {
+            var t = this;
+            if (new_val !== old_val) {
+                if (this.todays_date == '') {
+                    this.todays_date = new_val;
+                }
+                this.fetchComments(new_val);
+            }
+        }
+    },
+    methods: {
+        startEditing: function startEditing() {
+            this.state = 'editing';
+        },
+        stopEditing: function stopEditing() {
+            this.state = 'default';
+            this.data.body = '';
+        },
+        fetchComments: function fetchComments() {
+            var date = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+            var t = this;
+            t.loading = true;
+            if (date) {
+                // filter for that day
+                t.comments = [];
+                axios.get('/comments/' + date).then(function (_ref) {
+                    var data = _ref.data;
+
+                    t.comments = data;
+                    t.loading = false;
+                });
+            } else {
+                axios.get('/comments').then(function (_ref2) {
+                    var data = _ref2.data;
+
+                    t.comments = data;
+                    t.loading = false;
+                });
+            }
+        },
+        saveComment: function saveComment() {
+            var t = this;
+            axios.post('/comments', t.data).then(function (_ref3) {
+                var data = _ref3.data;
+
+                t.comments.unshift(data);
+                t.stopEditing();
+            });
+        },
+        updateComment: function updateComment($event) {
+            var t = this;
+            axios.put('/comments/' + $event.id, $event).then(function (_ref4) {
+                var data = _ref4.data;
+
+                t.comments[t.commentIndex($event.id)].body = data.body;
+            });
+        },
+        deleteComment: function deleteComment($event) {
+            var t = this;
+            axios.delete('/comments/' + $event.id, $event).then(function () {
+                t.comments.splice(t.commentIndex($event.id), 1);
+            });
+        },
+        commentIndex: function commentIndex(commentId) {
+            return this.comments.findIndex(function (element) {
+                return element.id === commentId;
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 65 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "max-w-3xl mx-auto" }, [
+    _c("div", { staticClass: "mb-4" }, [
+      _c("div", { staticClass: "mb-6 mt-4 flex justify-center" }, [
+        _c("div", { staticClass: "inline-block relative w-60" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker"
+            },
+            [
+              _c(
+                "svg",
+                {
+                  staticClass: "fill-current h-4 w-4",
+                  attrs: {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    viewBox: "0 0 20 20"
+                  }
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                    }
+                  })
+                ]
+              )
+            ]
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "flex flex-wrap bg-white rounded shadow-sm p-8" },
+      _vm._l(_vm.comments, function(comment, index) {
+        return _c(
+          "div",
+          {
+            key: comment.id,
+            staticClass: " lg:flex w-1/2 p-2",
+            attrs: { user: _vm.user, comment: comment }
+          },
+          [
+            _c("div", {
+              staticClass:
+                "h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden",
+              staticStyle: {
+                "background-image":
+                  "url('https://tailwindcss.com/img/card-left.jpg')"
+              },
+              attrs: { title: "Woman holding a mug" }
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal"
+              },
+              [
+                _c("div", { staticClass: "mb-8" }, [
+                  _c(
+                    "p",
+                    { staticClass: "text-sm text-grey-dark flex items-center" },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          staticClass: "fill-current text-grey w-3 h-3 mr-2",
+                          attrs: {
+                            xmlns: "http://www.w3.org/2000/svg",
+                            viewBox: "0 0 20 20"
+                          }
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              d:
+                                "M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z"
+                            }
+                          })
+                        ]
+                      ),
+                      _vm._v("\n                Members only\n              ")
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-black font-bold text-xl mb-2" },
+                    [_vm._v("Can coffee make you a better developer?")]
+                  ),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "text-grey-darker text-base" }, [
+                    _vm._v(
+                      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil."
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._m(1, true)
+              ]
+            )
+          ]
+        )
+      })
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "select",
+      {
+        staticClass:
+          "block appearance-none w-full bg-white border border-grey-light hover:border-grey px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+      },
+      [
+        _c("option", [_vm._v("January")]),
+        _vm._v(" "),
+        _c("option", [_vm._v("February")]),
+        _vm._v(" "),
+        _c("option", [_vm._v("March")])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex items-center" }, [
+      _c("img", {
+        staticClass: "w-10 h-10 rounded-full mr-4",
+        attrs: {
+          src:
+            "https://pbs.twimg.com/profile_images/885868801232961537/b1F6H4KC_400x400.jpg",
+          alt: "Avatar of Jonathan Reinink"
+        }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "text-sm" }, [
+        _c("p", { staticClass: "text-black leading-none" }, [
+          _vm._v("Jonathan Reinink")
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "text-grey-dark" }, [_vm._v("Aug 18")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0606934c", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

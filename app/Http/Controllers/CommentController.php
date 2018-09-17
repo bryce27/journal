@@ -22,10 +22,19 @@ class CommentController extends Controller
         return response($comments, 200);
     }
 
-    public function get($date)
+    public function getByDay($date)
     {
         $dt = new Carbon($date);
         $comments = Comment::with('author')->whereDay('created_at', '=', $dt)
+            ->orderByDesc('id')
+            ->get();
+
+        return response($comments, 200);
+    }
+
+    public function getByMonth($month)
+    {
+        $comments = Comment::with('author')->whereMonth('created_at', '=', $month)
             ->orderByDesc('id')
             ->get();
 
