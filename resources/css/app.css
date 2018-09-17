@@ -67,6 +67,7 @@
      font-family: 'Nunito';
      color: #ffffff;
      background-color: #3490dc;
+     padding: 5px;
 }
 #datepicker input:hover {
     cursor: pointer;

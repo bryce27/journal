@@ -33180,20 +33180,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -33222,74 +33208,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             data: {
                 body: ''
             },
-            state: ''
+            state: '',
+            loading: true
         };
     },
+    watch: {
+        date: function date(new_val, old_val) {
+            if (new_val !== old_val) {
+                console.log('new date: ', new_val);
+                this.fetchComments(new_val);
+            }
+        }
+    },
     methods: {
-        // updateComment($event) {
-        //     console.log('working')
-        //     let index = this.comments.findIndex((element) => {
-        //         return element.id === $event.id;
-        //     });
-        //     this.comments[index].body = $event.body;
-        // },
-        // deleteComment($event) {
-        //     let index = this.comments.findIndex((element) => {
-        //         return element.id === $event.id;
-        //     });
-        //     this.comments.splice(index, 1);
-        // },
-        // saveComment() {
-        //     let newComment = {
-        //         id: this.comments[this.comments.length - 1].id + 1,
-        //         body: this.data.body,
-        //         edited: false,
-        //         created_at: new Date().toLocaleString(),
-        //         author: {
-        //             id: this.user.id,
-        //             name: this.user.name,
-        //         }
-        //     }
-        //     this.comments.push(newComment);
-        //
-        //     this.data.body = '';
-        // },
-        // getDate() {
-        //     var d = new Date();
-        //     this.data.date.number = d.getDate()
-        //     var day_num = d.getDay()
-        //     this.data.date.day = this.getDayName(day_num)
-        //     var month_num = d.getMonth()
-        //     this.data.date.month = this.getMonthName(month_num)
-        //     this.data.date.year = d.getFullYear()
-        // },
-        // getDayName(num) {
-        //     var weekday = new Array(7)
-        //     weekday[0] =  "Sun"
-        //     weekday[1] = "Mon"
-        //     weekday[2] = "Tues"
-        //     weekday[3] = "Wed"
-        //     weekday[4] = "Thurs"
-        //     weekday[5] = "Fri"
-        //     weekday[6] = "Sat"
-        //     return weekday[num]
-        // },
-        // getMonthName(num) {
-        //     var month = new Array()
-        //     month[0] = "Jan"
-        //     month[1] = "Feb"
-        //     month[2] = "Mar"
-        //     month[3] = "Apr"
-        //     month[4] = "May"
-        //     month[5] = "Jun"
-        //     month[6] = "Jul"
-        //     month[7] = "Aug"
-        //     month[8] = "Sep"
-        //     month[9] = "Oct"
-        //     month[10] = "Nov"
-        //     month[11] = "Dec"
-        //     return month[num];
-        // },
         startEditing: function startEditing() {
             this.state = 'editing';
         },
@@ -33298,17 +33229,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.data.body = '';
         },
         fetchComments: function fetchComments() {
-            var t = this;
-            axios.get('/comments').then(function (_ref) {
-                var data = _ref.data;
+            var date = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
-                t.comments = data;
-            });
+            var t = this;
+            t.loading = true;
+            if (date) {
+                // filter for that day
+                t.comments = [];
+                axios.get('/comments/' + date).then(function (_ref) {
+                    var data = _ref.data;
+
+                    t.comments = data;
+                    t.loading = false;
+                });
+            } else {
+                axios.get('/comments').then(function (_ref2) {
+                    var data = _ref2.data;
+
+                    t.comments = data;
+                    t.loading = false;
+                });
+            }
         },
         saveComment: function saveComment() {
             var t = this;
-            axios.post('/comments', t.data).then(function (_ref2) {
-                var data = _ref2.data;
+            axios.post('/comments', t.data).then(function (_ref3) {
+                var data = _ref3.data;
 
                 t.comments.unshift(data);
                 t.stopEditing();
@@ -33316,8 +33262,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         updateComment: function updateComment($event) {
             var t = this;
-            axios.put('/comments/' + $event.id, $event).then(function (_ref3) {
-                var data = _ref3.data;
+            axios.put('/comments/' + $event.id, $event).then(function (_ref4) {
+                var data = _ref4.data;
 
                 t.comments[t.commentIndex($event.id)].body = data.body;
             });
@@ -33608,11 +33554,11 @@ var render = function() {
   return _c("div", { staticClass: "max-w-3xl mx-auto" }, [
     _c(
       "div",
-      { staticClass: "mb-4 flex justify-center" },
+      { staticClass: "mb-6 mt-4 flex justify-center" },
       [
         _c("datetime", {
           staticClass: "theme-blue",
-          attrs: { id: "datepicker" },
+          attrs: { id: "datepicker", "value-zone": "America/Denver" },
           model: {
             value: _vm.date,
             callback: function($$v) {
@@ -33693,21 +33639,28 @@ var render = function() {
     _c(
       "div",
       { staticClass: "bg-white rounded shadow-sm p-8" },
-      _vm._l(_vm.comments, function(comment, index) {
-        return _c("comment", {
-          key: comment.id,
-          class: [index === _vm.comments.length - 1 ? "" : "mb-6"],
-          attrs: { user: _vm.user, comment: comment },
-          on: {
-            "comment-updated": function($event) {
-              _vm.updateComment($event)
-            },
-            "comment-deleted": function($event) {
-              _vm.deleteComment($event)
+      [
+        _vm._l(_vm.comments, function(comment, index) {
+          return _c("comment", {
+            key: comment.id,
+            class: [index === _vm.comments.length - 1 ? "" : "mb-6"],
+            attrs: { user: _vm.user, comment: comment },
+            on: {
+              "comment-updated": function($event) {
+                _vm.updateComment($event)
+              },
+              "comment-deleted": function($event) {
+                _vm.deleteComment($event)
+              }
             }
-          }
-        })
-      })
+          })
+        }),
+        _vm._v(" "),
+        _vm.comments.length == 0 && !_vm.loading
+          ? _c("p", [_vm._v("There are no entries for this day.")])
+          : _vm._e()
+      ],
+      2
     )
   ])
 }

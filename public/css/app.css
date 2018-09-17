@@ -6406,6 +6406,7 @@ table {
   font-family: 'Nunito';
   color: #fff;
   background-color: #3490dc;
+  padding: 5px;
 }
 
 #datepicker input:hover {

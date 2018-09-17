@@ -19,10 +19,10 @@
             <div class="container mx-auto h-full">
                 <div class="flex items-center justify-center h-12">
                     <div class="mr-6">
-                        <a href="{{ url('/home') }}" class="no-underline hover:underline text-black font-bold text-sm">
+                        <a href="{{ url('/home') }}" class="no-underline hover:underline text-black font-bold text-md">
                             Home
                         </a>
-                        <a href="{{ url('/search') }}" class="no-underline hover:underline text-black font-bold text-sm pl-10">
+                        <a href="{{ url('/search') }}" class="no-underline hover:underline text-black font-bold text-md pl-10">
                             Search
                         </a>
                     </div>
@@ -34,7 +34,7 @@
                             <!-- <span class="text-grey-light-darker text-sm pr-4">{{ Auth::user()->name }}</span> -->
 
                             <a href="{{ route('logout') }}"
-                                class="no-underline hover:underline text-black font-bold text-sm"
+                                class="no-underline hover:underline text-black font-bold text-md"
                                 onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">

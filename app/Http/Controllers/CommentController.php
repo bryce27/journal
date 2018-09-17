@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class CommentController extends Controller
 {
@@ -15,6 +16,16 @@ class CommentController extends Controller
     public function index()
     {
         $comments = Comment::with('author')
+            ->orderByDesc('id')
+            ->get();
+
+        return response($comments, 200);
+    }
+
+    public function get($date)
+    {
+        $dt = new Carbon($date);
+        $comments = Comment::with('author')->whereDay('created_at', '=', $dt)
             ->orderByDesc('id')
             ->get();
 

@@ -2,23 +2,8 @@
 <template>
     <div class="max-w-3xl mx-auto">
 
-        <div class="mb-4 flex justify-center">
-            <datetime v-model="date" id="datepicker" class="theme-blue"></datetime>
-            <!-- calendar thing -->
-            <!-- <div class="block rounded-t overflow-hidden bg-white text-center w-24 hover:bg-grey-lightest cursor-pointer hover:shadow-md hover:opacity-50">
-                <div class="bg-red text-white py-1 cursor-pointer shadow-md">
-                  	{{data.date.month}}
-                </div>
-                <div class="pt-1 border-l border-r">
-                  	<span class="text-4xl font-bold">{{data.date.number}}</span>
-                </div>
-                <div class="pb-2 px-2 border-l border-r border-b rounded-b flex justify-between">
-                  	<span class="text-xs font-bold">{{data.date.day}}</span>
-                  	<span class="text-xs font-bold">{{data.date.year}}</span>
-                </div>
-                <datetime v-model="date"></datetime>
-            </div> -->
-            <!-- end calendar thing -->
+        <div class="mb-6 mt-4 flex justify-center">
+            <datetime v-model="date" id="datepicker" class="theme-blue" value-zone="America/Denver"></datetime>
         </div>
         <div class="bg-white rounded shadow-sm p-8 mb-4">
             <div class="mb-4">
@@ -44,6 +29,7 @@
                      @comment-updated="updateComment($event)"
                      @comment-deleted="deleteComment($event)">
             </comment>
+            <p v-if="comments.length == 0 && !loading">There are no entries for this day.</p>
         </div>
     </div>
 </template>
@@ -60,7 +46,7 @@
             comment
         },
         mounted() {
-            var d = new Date();
+            var d = new Date()
             this.date = d.toISOString()
         },
         created() {
@@ -74,74 +60,19 @@
                 data: {
                     body: ''
                 },
-                state: ''
+                state: '',
+                loading: true
           }
         },
+        watch: {
+            date: function(new_val, old_val){
+                if (new_val !== old_val){
+                    console.log('new date: ', new_val)
+                    this.fetchComments(new_val)
+                }
+            }
+        },
         methods: {
-            // updateComment($event) {
-            //     console.log('working')
-            //     let index = this.comments.findIndex((element) => {
-            //         return element.id === $event.id;
-            //     });
-            //     this.comments[index].body = $event.body;
-            // },
-            // deleteComment($event) {
-            //     let index = this.comments.findIndex((element) => {
-            //         return element.id === $event.id;
-            //     });
-            //     this.comments.splice(index, 1);
-            // },
-            // saveComment() {
-            //     let newComment = {
-            //         id: this.comments[this.comments.length - 1].id + 1,
-            //         body: this.data.body,
-            //         edited: false,
-            //         created_at: new Date().toLocaleString(),
-            //         author: {
-            //             id: this.user.id,
-            //             name: this.user.name,
-            //         }
-            //     }
-            //     this.comments.push(newComment);
-            //
-            //     this.data.body = '';
-            // },
-            // getDate() {
-            //     var d = new Date();
-            //     this.data.date.number = d.getDate()
-            //     var day_num = d.getDay()
-            //     this.data.date.day = this.getDayName(day_num)
-            //     var month_num = d.getMonth()
-            //     this.data.date.month = this.getMonthName(month_num)
-            //     this.data.date.year = d.getFullYear()
-            // },
-            // getDayName(num) {
-            //     var weekday = new Array(7)
-            //     weekday[0] =  "Sun"
-            //     weekday[1] = "Mon"
-            //     weekday[2] = "Tues"
-            //     weekday[3] = "Wed"
-            //     weekday[4] = "Thurs"
-            //     weekday[5] = "Fri"
-            //     weekday[6] = "Sat"
-            //     return weekday[num]
-            // },
-            // getMonthName(num) {
-            //     var month = new Array()
-            //     month[0] = "Jan"
-            //     month[1] = "Feb"
-            //     month[2] = "Mar"
-            //     month[3] = "Apr"
-            //     month[4] = "May"
-            //     month[5] = "Jun"
-            //     month[6] = "Jul"
-            //     month[7] = "Aug"
-            //     month[8] = "Sep"
-            //     month[9] = "Oct"
-            //     month[10] = "Nov"
-            //     month[11] = "Dec"
-            //     return month[num];
-            // },
             startEditing() {
                 this.state = 'editing';
             },
@@ -149,11 +80,23 @@
                 this.state = 'default';
                 this.data.body = '';
             },
-            fetchComments() {
-                const t = this;
-                axios.get('/comments').then(({data}) => {
-                    t.comments = data;
-                })
+            fetchComments(date = null) {
+                const t = this
+                t.loading = true
+                if (date){ // filter for that day
+                    t.comments = []
+                    axios.get('/comments/'+date).then(({data}) => {
+                        t.comments = data;
+                        t.loading = false
+                    })
+                }
+                else {
+                    axios.get('/comments').then(({data}) => {
+                        t.comments = data;
+                        t.loading = false
+                    })
+                }
+
             },
             saveComment() {
                 const t = this;

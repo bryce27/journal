@@ -20,6 +20,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // Comments
 Route::get('/comments', 'CommentController@index');
+Route::get('/comments/{date}', 'CommentController@get');
 Route::post('/comments', 'CommentController@store');
 Route::put('/comments/{comment}', 'CommentController@update');
 Route::delete('/comments/{comment}', 'CommentController@destroy');
