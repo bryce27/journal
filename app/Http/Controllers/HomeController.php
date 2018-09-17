@@ -30,4 +30,9 @@ class HomeController extends Controller
     {
         return view('review');
     }
+
+    public function comment()
+    {
+        return view('comment'); // view an entry
+    }
 }

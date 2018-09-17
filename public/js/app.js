@@ -43180,6 +43180,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -43291,39 +43298,81 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "max-w-3xl mx-auto" }, [
-    _c("div", { staticClass: "mb-4" }, [
-      _c("div", { staticClass: "mb-6 mt-4 flex justify-center" }, [
-        _c("div", { staticClass: "inline-block relative w-60" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker"
-            },
-            [
-              _c(
-                "svg",
-                {
-                  staticClass: "fill-current h-4 w-4",
-                  attrs: {
-                    xmlns: "http://www.w3.org/2000/svg",
-                    viewBox: "0 0 20 20"
-                  }
-                },
-                [
-                  _c("path", {
+    _c("div", { staticClass: "mb-4 flex justify-center" }, [
+      _c("div", { staticClass: "mr-2 mb-6 mt-4" }, [
+        _c(
+          "div",
+          { staticClass: "inline-block relative w-60 text-xl font-bold" },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker"
+              },
+              [
+                _c(
+                  "svg",
+                  {
+                    staticClass: "fill-current h-4 w-4",
                     attrs: {
-                      d:
-                        "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                      xmlns: "http://www.w3.org/2000/svg",
+                      viewBox: "0 0 20 20"
                     }
-                  })
-                ]
-              )
-            ]
-          )
-        ])
+                  },
+                  [
+                    _c("path", {
+                      attrs: {
+                        d:
+                          "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                      }
+                    })
+                  ]
+                )
+              ]
+            )
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "ml-2 mb-6 mt-4" }, [
+        _c(
+          "div",
+          { staticClass: "inline-block relative w-60 text-xl font-bold" },
+          [
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker"
+              },
+              [
+                _c(
+                  "svg",
+                  {
+                    staticClass: "fill-current h-4 w-4",
+                    attrs: {
+                      xmlns: "http://www.w3.org/2000/svg",
+                      viewBox: "0 0 20 20"
+                    }
+                  },
+                  [
+                    _c("path", {
+                      attrs: {
+                        d:
+                          "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                      }
+                    })
+                  ]
+                )
+              ]
+            )
+          ]
+        )
       ])
     ]),
     _vm._v(" "),
@@ -43335,7 +43384,8 @@ var render = function() {
           "div",
           {
             key: comment.id,
-            staticClass: " lg:flex w-1/2 p-2",
+            staticClass:
+              "lg:flex p-2 shadow-sm flex-1 hover:bg-grey-lightest cursor-pointer",
             attrs: { user: _vm.user, comment: comment }
           },
           [
@@ -43358,45 +43408,15 @@ var render = function() {
               [
                 _c("div", { staticClass: "mb-8" }, [
                   _c(
-                    "p",
-                    { staticClass: "text-sm text-grey-dark flex items-center" },
-                    [
-                      _c(
-                        "svg",
-                        {
-                          staticClass: "fill-current text-grey w-3 h-3 mr-2",
-                          attrs: {
-                            xmlns: "http://www.w3.org/2000/svg",
-                            viewBox: "0 0 20 20"
-                          }
-                        },
-                        [
-                          _c("path", {
-                            attrs: {
-                              d:
-                                "M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z"
-                            }
-                          })
-                        ]
-                      ),
-                      _vm._v("\n                Members only\n              ")
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
                     "div",
                     { staticClass: "text-black font-bold text-xl mb-2" },
-                    [_vm._v("Can coffee make you a better developer?")]
+                    [_vm._v(_vm._s(comment.created_at))]
                   ),
                   _vm._v(" "),
                   _c("p", { staticClass: "text-grey-darker text-base" }, [
-                    _vm._v(
-                      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil."
-                    )
+                    _vm._v(_vm._s(comment.body))
                   ])
-                ]),
-                _vm._v(" "),
-                _vm._m(1, true)
+                ])
               ]
             )
           ]
@@ -43416,37 +43436,45 @@ var staticRenderFns = [
         staticClass:
           "block appearance-none w-full bg-white border border-grey-light hover:border-grey px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
       },
-      [
-        _c("option", [_vm._v("January")]),
-        _vm._v(" "),
-        _c("option", [_vm._v("February")]),
-        _vm._v(" "),
-        _c("option", [_vm._v("March")])
-      ]
+      [_c("option", [_vm._v("2018")])]
     )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex items-center" }, [
-      _c("img", {
-        staticClass: "w-10 h-10 rounded-full mr-4",
-        attrs: {
-          src:
-            "https://pbs.twimg.com/profile_images/885868801232961537/b1F6H4KC_400x400.jpg",
-          alt: "Avatar of Jonathan Reinink"
-        }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "text-sm" }, [
-        _c("p", { staticClass: "text-black leading-none" }, [
-          _vm._v("Jonathan Reinink")
-        ]),
+    return _c(
+      "select",
+      {
+        staticClass:
+          "block appearance-none w-full bg-white border border-grey-light hover:border-grey px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+      },
+      [
+        _c("option", [_vm._v("January")]),
         _vm._v(" "),
-        _c("p", { staticClass: "text-grey-dark" }, [_vm._v("Aug 18")])
-      ])
-    ])
+        _c("option", [_vm._v("February")]),
+        _vm._v(" "),
+        _c("option", [_vm._v("March")]),
+        _vm._v(" "),
+        _c("option", [_vm._v("April")]),
+        _vm._v(" "),
+        _c("option", [_vm._v("May")]),
+        _vm._v(" "),
+        _c("option", [_vm._v("June")]),
+        _vm._v(" "),
+        _c("option", [_vm._v("July")]),
+        _vm._v(" "),
+        _c("option", [_vm._v("August")]),
+        _vm._v(" "),
+        _c("option", [_vm._v("Sept")]),
+        _vm._v(" "),
+        _c("option", [_vm._v("October")]),
+        _vm._v(" "),
+        _c("option", [_vm._v("November")]),
+        _vm._v(" "),
+        _c("option", [_vm._v("December")])
+      ]
+    )
   }
 ]
 render._withStripped = true
