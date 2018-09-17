@@ -22,7 +22,7 @@ Route::get('/review', 'HomeController@review')->name('review');
 // Comments
 Route::get('/comments', 'CommentController@index');
 Route::get('/comments/{date}', 'CommentController@getByDay');
-Route::get('/comments/{month}', 'CommentController@getByMonth');
+Route::get('/comments/month/{month}', 'CommentController@getByMonth');
 Route::post('/comments', 'CommentController@store');
 Route::put('/comments/{comment}', 'CommentController@update');
 Route::delete('/comments/{comment}', 'CommentController@destroy');

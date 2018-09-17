@@ -25,6 +25,7 @@ import Datetime from 'vue-datetime'
 import 'vue-datetime/dist/vue-datetime.css'
 
 Vue.use(Datetime)
+Vue.use(require('vue-moment'));
 
 const app = new Vue({
     el: '#app'

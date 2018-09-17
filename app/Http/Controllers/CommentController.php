@@ -34,7 +34,7 @@ class CommentController extends Controller
 
     public function getByMonth($month)
     {
-        $comments = Comment::with('author')->whereMonth('created_at', '=', $month)
+        $comments = Comment::with('author')->whereMonth('created_at', $month)
             ->orderByDesc('id')
             ->get();
 
