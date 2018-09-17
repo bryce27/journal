@@ -33159,6 +33159,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -33173,13 +33190,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     created: function created() {
         this.fetchComments();
+        this.getDate();
     },
 
     data: function data() {
         return {
             comments: [],
             data: {
-                body: ''
+                body: '',
+                date: {
+                    number: 0,
+                    day: 0,
+                    month: '',
+                    year: 0
+                }
             },
             state: ''
         };
@@ -33213,6 +33237,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         //
         //     this.data.body = '';
         // },
+        getDate: function getDate() {
+            var d = new Date();
+            this.data.date.number = d.getDate();
+            var day_num = d.getDay();
+            this.data.date.day = this.getDayName(day_num);
+            var month_num = d.getMonth();
+            this.data.date.month = this.getMonthName(month_num);
+            this.data.date.year = d.getFullYear();
+        },
+        getDayName: function getDayName(num) {
+            var weekday = new Array(7);
+            weekday[0] = "Sun";
+            weekday[1] = "Mon";
+            weekday[2] = "Tues";
+            weekday[3] = "Wed";
+            weekday[4] = "Thurs";
+            weekday[5] = "Fri";
+            weekday[6] = "Sat";
+            return weekday[num];
+        },
+        getMonthName: function getMonthName(num) {
+            var month = new Array();
+            month[0] = "Jan";
+            month[1] = "Feb";
+            month[2] = "Mar";
+            month[3] = "Apr";
+            month[4] = "May";
+            month[5] = "Jun";
+            month[6] = "Jul";
+            month[7] = "Aug";
+            month[8] = "Sep";
+            month[9] = "Oct";
+            month[10] = "Nov";
+            month[11] = "Dec";
+            return month[num];
+        },
         startEditing: function startEditing() {
             this.state = 'editing';
         },
@@ -33529,6 +33589,48 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "max-w-3xl mx-auto" }, [
+    _c("div", { staticClass: "mb-4 flex justify-center" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "block rounded-t overflow-hidden bg-white text-center w-24"
+        },
+        [
+          _c("div", { staticClass: "bg-red text-white py-1" }, [
+            _vm._v(
+              "\n              \t" +
+                _vm._s(_vm.data.date.month) +
+                "\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "pt-1 border-l border-r" }, [
+            _c("span", { staticClass: "text-4xl font-bold" }, [
+              _vm._v(_vm._s(_vm.data.date.number))
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "pb-2 px-2 border-l border-r border-b rounded-b flex justify-between"
+            },
+            [
+              _c("span", { staticClass: "text-xs font-bold" }, [
+                _vm._v(_vm._s(_vm.data.date.day))
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "text-xs font-bold" }, [
+                _vm._v(_vm._s(_vm.data.date.year))
+              ])
+            ]
+          )
+        ]
+      )
+    ]),
+    _vm._v(" "),
     _c("div", { staticClass: "bg-white rounded shadow-sm p-8 mb-4" }, [
       _vm._m(0),
       _vm._v(" "),
@@ -33544,7 +33646,7 @@ var render = function() {
         staticClass:
           "bg-grey-lighter rounded leading-normal resize-none w-full py-2 px-3",
         class: [_vm.state === "editing" ? "h-24" : "h-10"],
-        attrs: { placeholder: "Add a comment" },
+        attrs: { placeholder: "Add an entry" },
         domProps: { value: _vm.data.body },
         on: {
           focus: _vm.startEditing,
@@ -33621,7 +33723,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "mb-4" }, [
-      _c("h2", { staticClass: "text-black" }, [_vm._v("Comments")])
+      _c("h2", { staticClass: "text-black" }, [_vm._v("Entries")])
     ])
   }
 ]
