@@ -1,11 +1,10 @@
 <!-- TODO: connec to facebook/insta to choose a photo of the day and use this card https://tailwindcss.com/docs/examples/cards-->
 <template>
     <div class="max-w-3xl mx-auto">
-
         <div class="mb-6 mt-4 flex justify-center">
-            <datetime v-model="date" id="datepicker" class="theme-blue" value-zone="America/Denver"></datetime>
+            <datetime v-model="date" id="datepicker" class="theme-blue" value-zone="America/Denver" :format="{ year: 'numeric', month: 'long', day: 'numeric'}"></datetime>
         </div>
-        <div class="bg-white rounded shadow-sm p-8 mb-4">
+        <div class="bg-white rounded shadow-sm p-8 mb-4" v-if="todays_date == date">
             <div class="mb-4">
                 <h2 class="text-black">Entries</h2>
             </div>
@@ -45,17 +44,17 @@
         components: {
             comment
         },
-        mounted() {
+        created() {
             var d = new Date()
             this.date = d.toISOString()
-        },
-        created() {
-            this.fetchComments()
-            //this.getDate()
+            console.log('first time: ', this.date)
+            //this.fetchComments(d.toISOString())
+            //this.todays_date = this.date
         },
         data: function() {
             return {
                 date: '',
+                todays_date: '',
                 comments: [],
                 data: {
                     body: ''
@@ -66,7 +65,11 @@
         },
         watch: {
             date: function(new_val, old_val){
+                const t = this
                 if (new_val !== old_val){
+                    if (this.todays_date == ''){
+                        this.todays_date = new_val
+                    }
                     console.log('new date: ', new_val)
                     this.fetchComments(new_val)
                 }

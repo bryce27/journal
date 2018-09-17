@@ -33179,7 +33179,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -33192,18 +33191,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     components: {
         comment: __WEBPACK_IMPORTED_MODULE_0__CommentItem___default.a
     },
-    mounted: function mounted() {
+    created: function created() {
         var d = new Date();
         this.date = d.toISOString();
-    },
-    created: function created() {
-        this.fetchComments();
-        //this.getDate()
+        console.log('first time: ', this.date);
+        //this.fetchComments(d.toISOString())
+        //this.todays_date = this.date
     },
 
     data: function data() {
         return {
             date: '',
+            todays_date: '',
             comments: [],
             data: {
                 body: ''
@@ -33214,7 +33213,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     watch: {
         date: function date(new_val, old_val) {
+            var t = this;
             if (new_val !== old_val) {
+                if (this.todays_date == '') {
+                    this.todays_date = new_val;
+                }
                 console.log('new date: ', new_val);
                 this.fetchComments(new_val);
             }
@@ -33558,7 +33561,11 @@ var render = function() {
       [
         _c("datetime", {
           staticClass: "theme-blue",
-          attrs: { id: "datepicker", "value-zone": "America/Denver" },
+          attrs: {
+            id: "datepicker",
+            "value-zone": "America/Denver",
+            format: { year: "numeric", month: "long", day: "numeric" }
+          },
           model: {
             value: _vm.date,
             callback: function($$v) {
@@ -33571,70 +33578,72 @@ var render = function() {
       1
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "bg-white rounded shadow-sm p-8 mb-4" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c("textarea", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.data.body,
-            expression: "data.body"
-          }
-        ],
-        staticClass:
-          "bg-grey-lighter rounded leading-normal resize-none w-full py-2 px-3",
-        class: [_vm.state === "editing" ? "h-24" : "h-10"],
-        attrs: { placeholder: "Add an entry" },
-        domProps: { value: _vm.data.body },
-        on: {
-          focus: _vm.startEditing,
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+    _vm.todays_date == _vm.date
+      ? _c("div", { staticClass: "bg-white rounded shadow-sm p-8 mb-4" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.data.body,
+                expression: "data.body"
+              }
+            ],
+            staticClass:
+              "bg-grey-lighter rounded leading-normal resize-none w-full py-2 px-3",
+            class: [_vm.state === "editing" ? "h-24" : "h-10"],
+            attrs: { placeholder: "Add an entry" },
+            domProps: { value: _vm.data.body },
+            on: {
+              focus: _vm.startEditing,
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.data, "body", $event.target.value)
+              }
             }
-            _vm.$set(_vm.data, "body", $event.target.value)
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.state === "editing",
-              expression: "state === 'editing'"
-            }
-          ],
-          staticClass: "mt-3"
-        },
-        [
-          _c(
-            "button",
-            {
-              staticClass:
-                "border border-blue bg-blue text-white hover:bg-blue-dark py-2 px-4 rounded tracking-wide mr-1",
-              on: { click: _vm.saveComment }
-            },
-            [_vm._v("Save")]
-          ),
+          }),
           _vm._v(" "),
           _c(
-            "button",
+            "div",
             {
-              staticClass:
-                "border border-grey-darker text-grey-darker hover:bg-grey-dark hover:text-white py-2 px-4 rounded tracking-wide ml-1",
-              on: { click: _vm.stopEditing }
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.state === "editing",
+                  expression: "state === 'editing'"
+                }
+              ],
+              staticClass: "mt-3"
             },
-            [_vm._v("Cancel")]
+            [
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "border border-blue bg-blue text-white hover:bg-blue-dark py-2 px-4 rounded tracking-wide mr-1",
+                  on: { click: _vm.saveComment }
+                },
+                [_vm._v("Save")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "border border-grey-darker text-grey-darker hover:bg-grey-dark hover:text-white py-2 px-4 rounded tracking-wide ml-1",
+                  on: { click: _vm.stopEditing }
+                },
+                [_vm._v("Cancel")]
+              )
+            ]
           )
-        ]
-      )
-    ]),
+        ])
+      : _vm._e(),
     _vm._v(" "),
     _c(
       "div",
