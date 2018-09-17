@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Comment;
 
 class HomeController extends Controller
 {
@@ -31,8 +32,8 @@ class HomeController extends Controller
         return view('review');
     }
 
-    public function comment()
+    public function comment(Comment $comment)
     {
-        return view('comment'); // view an entry
+        return view('comment-review', compact('comment')); // view an entry
     }
 }

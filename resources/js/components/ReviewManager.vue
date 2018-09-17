@@ -38,8 +38,8 @@
         </div>
         <div class="flex flex-wrap bg-white rounded shadow-sm p-8">
 
-            <div class="lg:flex p-2 m-2 flex-1 cursor-pointer hover:shadow-md border-r border-b border-grey-light" v-for="(comment, index) in comments"
-                :key="comment.id" :user="user" :comment="comment">
+            <div class="lg:flex p-2 m-2 flex-1 cursor-pointer hover:shadow-md border-r border-b border-grey-lighter" v-for="(comment, index) in comments"
+                :key="comment.id" :user="user" :comment="comment" v-on:click="goToComment(comment.id)">
               <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('https://tailwindcss.com/img/card-left.jpg')" title="Woman holding a mug">
               </div>
               <div class="bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
@@ -67,12 +67,13 @@
         },
         created() {
             var d = new Date()
-            this.date = d.toISOString()
+            //this.date = d.toISOString()
+            this.month_selected = d.getMonth() + 1
         },
         data: function() {
             return {
-                date: '',
-                todays_date: '',
+                // date: '',
+                // todays_date: '',
                 comments: [],
                 data: {
                     body: ''
@@ -126,6 +127,9 @@
                 return this.comments.findIndex((element) => {
                     return element.id === commentId;
                 });
+            },
+            goToComment(id){
+                window.location.href = '/comment/'+id;
             }
 
         }

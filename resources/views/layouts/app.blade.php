@@ -25,6 +25,9 @@
                         <a href="{{ url('/review') }}" class="no-underline hover:underline text-black font-bold text-md pl-10">
                             Review
                         </a>
+                        <a href="{{ url('/friends') }}" class="no-underline hover:underline text-black font-bold text-md pl-10">
+                            Friends
+                        </a>
                         <a href="{{ url('/search') }}" class="no-underline hover:underline text-black font-bold text-md pl-10">
                             Search
                         </a>

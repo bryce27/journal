@@ -18,6 +18,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/review', 'HomeController@review')->name('review');
+Route::get('/comment/{comment}', 'HomeController@comment')->name('comment');
 
 // Comments
 Route::get('/comments', 'CommentController@index');

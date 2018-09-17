@@ -18,6 +18,7 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('comments-manager', require('./components/CommentsManager.vue'));
 Vue.component('review-manager', require('./components/ReviewManager.vue'));
+Vue.component('comment-review', require('./components/CommentReview.vue'));
 
 import Vue from 'vue'
 import Datetime from 'vue-datetime'
