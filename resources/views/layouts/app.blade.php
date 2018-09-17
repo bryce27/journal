@@ -13,7 +13,7 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 </head>
-<body class="bg-grey-light h-screen antialiased">
+<body class="bg-grey-lighter h-screen antialiased">
     <div id="app">
         <nav class="bg-white h-12 shadow mb-8 px-6 md:px-0">
             <div class="container mx-auto h-full">

@@ -1,10 +1,12 @@
 <!-- TODO: connec to facebook/insta to choose a photo of the day and use this card https://tailwindcss.com/docs/examples/cards-->
 <template>
     <div class="max-w-3xl mx-auto">
+
         <div class="mb-4 flex justify-center">
+            <datetime v-model="date" id="datepicker" class="theme-blue"></datetime>
             <!-- calendar thing -->
-            <div class="block rounded-t overflow-hidden bg-white text-center w-24">
-                <div class="bg-red text-white py-1">
+            <!-- <div class="block rounded-t overflow-hidden bg-white text-center w-24 hover:bg-grey-lightest cursor-pointer hover:shadow-md hover:opacity-50">
+                <div class="bg-red text-white py-1 cursor-pointer shadow-md">
                   	{{data.date.month}}
                 </div>
                 <div class="pt-1 border-l border-r">
@@ -14,7 +16,8 @@
                   	<span class="text-xs font-bold">{{data.date.day}}</span>
                   	<span class="text-xs font-bold">{{data.date.year}}</span>
                 </div>
-            </div>
+                <datetime v-model="date"></datetime>
+            </div> -->
             <!-- end calendar thing -->
         </div>
         <div class="bg-white rounded shadow-sm p-8 mb-4">
@@ -56,21 +59,20 @@
         components: {
             comment
         },
+        mounted() {
+            var d = new Date();
+            this.date = d.toISOString()
+        },
         created() {
             this.fetchComments()
-            this.getDate()
+            //this.getDate()
         },
         data: function() {
             return {
+                date: '',
                 comments: [],
                 data: {
-                    body: '',
-                    date: {
-                        number: 0,
-                        day: 0,
-                        month: '',
-                        year: 0
-                    }
+                    body: ''
                 },
                 state: ''
           }
@@ -104,42 +106,42 @@
             //
             //     this.data.body = '';
             // },
-            getDate() {
-                var d = new Date();
-                this.data.date.number = d.getDate()
-                var day_num = d.getDay()
-                this.data.date.day = this.getDayName(day_num)
-                var month_num = d.getMonth()
-                this.data.date.month = this.getMonthName(month_num)
-                this.data.date.year = d.getFullYear()
-            },
-            getDayName(num) {
-                var weekday = new Array(7)
-                weekday[0] =  "Sun"
-                weekday[1] = "Mon"
-                weekday[2] = "Tues"
-                weekday[3] = "Wed"
-                weekday[4] = "Thurs"
-                weekday[5] = "Fri"
-                weekday[6] = "Sat"
-                return weekday[num]
-            },
-            getMonthName(num) {
-                var month = new Array()
-                month[0] = "Jan"
-                month[1] = "Feb"
-                month[2] = "Mar"
-                month[3] = "Apr"
-                month[4] = "May"
-                month[5] = "Jun"
-                month[6] = "Jul"
-                month[7] = "Aug"
-                month[8] = "Sep"
-                month[9] = "Oct"
-                month[10] = "Nov"
-                month[11] = "Dec"
-                return month[num];
-            },
+            // getDate() {
+            //     var d = new Date();
+            //     this.data.date.number = d.getDate()
+            //     var day_num = d.getDay()
+            //     this.data.date.day = this.getDayName(day_num)
+            //     var month_num = d.getMonth()
+            //     this.data.date.month = this.getMonthName(month_num)
+            //     this.data.date.year = d.getFullYear()
+            // },
+            // getDayName(num) {
+            //     var weekday = new Array(7)
+            //     weekday[0] =  "Sun"
+            //     weekday[1] = "Mon"
+            //     weekday[2] = "Tues"
+            //     weekday[3] = "Wed"
+            //     weekday[4] = "Thurs"
+            //     weekday[5] = "Fri"
+            //     weekday[6] = "Sat"
+            //     return weekday[num]
+            // },
+            // getMonthName(num) {
+            //     var month = new Array()
+            //     month[0] = "Jan"
+            //     month[1] = "Feb"
+            //     month[2] = "Mar"
+            //     month[3] = "Apr"
+            //     month[4] = "May"
+            //     month[5] = "Jun"
+            //     month[6] = "Jul"
+            //     month[7] = "Aug"
+            //     month[8] = "Sep"
+            //     month[9] = "Oct"
+            //     month[10] = "Nov"
+            //     month[11] = "Dec"
+            //     return month[num];
+            // },
             startEditing() {
                 this.state = 'editing';
             },

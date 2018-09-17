@@ -6393,6 +6393,39 @@ table {
  * @import "utilities/skew-transforms";
  */
 
+#datepicker {
+  -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
+  font-family: 'Nunito';
+}
+
+#datepicker input {
+  text-align: center !important;
+  font-size: 1.6rem !important;
+  border-radius: .25rem;
+  font-family: 'Nunito';
+  color: #fff;
+  background-color: #3490dc;
+}
+
+#datepicker input:hover {
+  cursor: pointer;
+  color: #2779bd;
+  background-color: #fff;
+}
+
+.theme-blue .vdatetime-popup__header,
+.theme-blue .vdatetime-calendar__month__day--selected > span > span,
+.theme-blue .vdatetime-calendar__month__day--selected:hover > span > span {
+  background: #3490dc;
+}
+
+.theme-blue .vdatetime-year-picker__item--selected,
+.theme-blue .vdatetime-time-picker__item--selected,
+.theme-blue .vdatetime-popup__actions__button {
+  color: #3490dc;
+}
+
 @media (min-width: 576px) {
   .sm\:list-reset {
     list-style: none;

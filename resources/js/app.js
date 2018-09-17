@@ -18,6 +18,12 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('comments-manager', require('./components/CommentsManager.vue'));
 
+import Vue from 'vue'
+import Datetime from 'vue-datetime'
+// You need a specific loader for CSS files
+import 'vue-datetime/dist/vue-datetime.css'
+
+Vue.use(Datetime)
 
 const app = new Vue({
     el: '#app'
