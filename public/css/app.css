@@ -3153,6 +3153,10 @@ table {
   font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
 }
 
+.font-nunito {
+  font-family: Nunito, sans-serif;
+}
+
 .font-hairline {
   font-weight: 100;
 }
@@ -8837,6 +8841,10 @@ table {
     font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
   }
 
+  .sm\:font-nunito {
+    font-family: Nunito, sans-serif;
+  }
+
   .sm\:font-hairline {
     font-weight: 100;
   }
@@ -14489,6 +14497,10 @@ table {
 
   .md\:font-mono {
     font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+  }
+
+  .md\:font-nunito {
+    font-family: Nunito, sans-serif;
   }
 
   .md\:font-hairline {
@@ -20145,6 +20157,10 @@ table {
     font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
   }
 
+  .lg\:font-nunito {
+    font-family: Nunito, sans-serif;
+  }
+
   .lg\:font-hairline {
     font-weight: 100;
   }
@@ -25797,6 +25813,10 @@ table {
 
   .xl\:font-mono {
     font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+  }
+
+  .xl\:font-nunito {
+    font-family: Nunito, sans-serif;
   }
 
   .xl\:font-hairline {

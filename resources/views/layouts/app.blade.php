@@ -11,6 +11,7 @@
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 </head>
 <body class="bg-teal-lightest h-screen antialiased">
     <div id="app">
