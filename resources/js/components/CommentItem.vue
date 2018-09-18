@@ -5,8 +5,8 @@
                 <p class="text-grey-darkest leading-normal text-lg">{{comment.body}}</p>
                 <button v-if="editable" @click="state = 'editing'" class="ml-2 mt-1 mb-auto text-blue hover:text-blue-dark text-sm">Edit</button>
             </div>
-            <div class="text-grey-dark leading-normal text-sm">
-                <p>{{comment.author.full_name}} <span class="mx-1 text-xs">&bull;</span>{{ comment.created_at}}</p>
+            <div class="text-grey text-xs">
+                <p><span class="mx-1 text-xs">&bull;</span>{{ comment.created_at | moment("MMMM Do")}}</p>
             </div>
         </div>
 

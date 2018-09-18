@@ -2,7 +2,7 @@
     <div class="max-w-2xl mx-auto flex">
         <div class="bg-white rounded shadow-sm p-8 pb-0 mb-4 mr-4 flex-1" >
             <div class="mb-4">
-                <h2 class="text-black">{{this.comment.created_at | moment("MMMM Do YYYY")}}</h2>
+                <h2 class="text-black hover:text-blue no-underline">{{this.comment.created_at | moment("MMMM Do YYYY")}}</h2>
             </div>
             <div class="mt-6">
                 <p>{{data.body}}</p>

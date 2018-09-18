@@ -33437,11 +33437,12 @@ var render = function() {
               : _vm._e()
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "text-grey-dark leading-normal text-sm" }, [
+          _c("div", { staticClass: "text-grey text-xs" }, [
             _c("p", [
-              _vm._v(_vm._s(_vm.comment.author.full_name) + " "),
               _c("span", { staticClass: "mx-1 text-xs" }, [_vm._v("•")]),
-              _vm._v(_vm._s(_vm.comment.created_at))
+              _vm._v(
+                _vm._s(_vm._f("moment")(_vm.comment.created_at, "MMMM Do"))
+              )
             ])
           ])
         ])
@@ -33813,6 +33814,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     components: {
         comment: __WEBPACK_IMPORTED_MODULE_0__CommentItem___default.a
     },
+    filters: {
+        preview: function preview(value) {
+            if (!value) return '';
+            return value.split(" ").splice(0, 10).join(" ") + '...';
+        }
+    },
     created: function created() {
         var d = new Date();
         //this.date = d.toISOString()
@@ -34114,7 +34121,7 @@ var render = function() {
                     ),
                     _vm._v(" "),
                     _c("p", { staticClass: "text-grey-darker text-base" }, [
-                      _vm._v(_vm._s(comment.body))
+                      _vm._v(_vm._s(_vm._f("preview")(comment.body)))
                     ])
                   ])
                 ]
@@ -48356,9 +48363,17 @@ var render = function() {
       { staticClass: "bg-white rounded shadow-sm p-8 pb-0 mb-4 mr-4 flex-1" },
       [
         _c("div", { staticClass: "mb-4" }, [
-          _c("h2", { staticClass: "text-black" }, [
-            _vm._v(
-              _vm._s(_vm._f("moment")(this.comment.created_at, "MMMM Do YYYY"))
+          _c("a", { attrs: { href: "/home" } }, [
+            _c(
+              "h2",
+              { staticClass: "text-black hover:text-blue no-underline" },
+              [
+                _vm._v(
+                  _vm._s(
+                    _vm._f("moment")(this.comment.created_at, "MMMM Do YYYY")
+                  )
+                )
+              ]
             )
           ])
         ]),

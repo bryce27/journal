@@ -45,7 +45,7 @@
               <div class="bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
                 <div class="mb-8">
                   <div class="text-black font-bold text-xl mb-2">{{comment.created_at | moment("dddd Do")}}</div>
-                  <p class="text-grey-darker text-base">{{comment.body}}</p>
+                  <p class="text-grey-darker text-base">{{comment.body | preview}}</p>
                 </div>
               </div>
             </div>
@@ -64,6 +64,12 @@
         },
         components: {
             comment
+        },
+        filters: {
+          preview: function (value) {
+            if (!value) return ''
+            return value.split(" ").splice(0,10).join(" ")+'...'
+          }
         },
         created() {
             var d = new Date()
