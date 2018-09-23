@@ -75,6 +75,27 @@
     background-color: #ffffff;
 }
 
+#todaylink:hover {
+    cursor: pointer;
+    color: #2779bd;
+    background-color: #ffffff;
+}
+
+#todaylink{
+    text-align: center !important;
+    font-size: 1.6rem !important;
+    border-radius: .25rem;
+    font-family: 'Nunito';
+    color: #ffffff;
+    background-color: #3490dc;
+    padding: 5px;
+}
+
+#todaylink {
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.10);
+    font-family: 'Nunito';
+}
+
 .theme-blue .vdatetime-popup__header,
 .theme-blue .vdatetime-calendar__month__day--selected > span > span,
 .theme-blue .vdatetime-calendar__month__day--selected:hover > span > span {

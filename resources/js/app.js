@@ -15,7 +15,7 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+// Vue.component('day-manager', require('./components/Daymanager.vue'));
 Vue.component('comments-manager', require('./components/CommentsManager.vue'));
 Vue.component('review-manager', require('./components/ReviewManager.vue'));
 Vue.component('comment-review', require('./components/CommentReview.vue'));

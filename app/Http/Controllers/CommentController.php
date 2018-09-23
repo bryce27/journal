@@ -50,7 +50,8 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'body' => 'required|string'
+            'body' => 'required|string',
+            'video_url' => 'nullable|string'
         ]);
 
         $comment = auth()->user()
@@ -72,10 +73,12 @@ class CommentController extends Controller
     public function update(Request $request, Comment $comment)
     {
         $data = $request->validate([
-            'body' => 'required|string'
+            'body' => 'required|string',
+            'video_url' => 'nullable|string'
         ]);
 
         $comment->body = $data['body'];
+        $comment->video_url = $data['video_url'];
 
         $comment->save();
 

@@ -9,6 +9,7 @@ class Comment extends Model
     protected $fillable = [
         'body',
         'user_id',
+        'video_url',
     ];
 
     protected $casts = [

@@ -2,6 +2,7 @@
 <template>
     <div class="max-w-3xl mx-auto">
         <div class="mb-6 mt-4 flex justify-center">
+            <a id="todaylink" class="no-underline mr-5" href="#" @click.prevent="date = todays_date" v-if="todays_date != date">Go to Today</a>
             <datetime v-model="date" id="datepicker" class="theme-blue" value-zone="America/Denver" :format="{ year: 'numeric', month: 'long', day: 'numeric'}"></datetime>
         </div>
         <div class="bg-white rounded shadow-sm p-8 mb-4" v-if="todays_date == date">
@@ -14,6 +15,14 @@
                       :class="[state === 'editing' ? 'h-24' : 'h-10']"
                       @focus="startEditing">
             </textarea>
+            <!-- add google photo integration -->
+            <textarea v-model="data.video_url"
+                      v-if="state == 'editing'"
+                      placeholder="Add a video link"
+                      class="bg-grey-lighter rounded leading-normal resize-none w-full py-2 px-3 h-10 mt-2"
+                      @focus="startEditing">
+            </textarea>
+            <!-- select song from spotify or image from social media or tag from previous tags or new tag -->
             <div v-show="state === 'editing'" class="mt-3">
                 <button class="border border-blue bg-blue text-white hover:bg-blue-dark py-2 px-4 rounded tracking-wide mr-1" @click="saveComment">Save</button>
                 <button class="border border-grey-darker text-grey-darker hover:bg-grey-dark hover:text-white py-2 px-4 rounded tracking-wide ml-1" @click="stopEditing">Cancel</button>
@@ -54,7 +63,8 @@
                 todays_date: '',
                 comments: [],
                 data: {
-                    body: ''
+                    body: '',
+                    video_url: '',
                 },
                 state: '',
                 loading: true

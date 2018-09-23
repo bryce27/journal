@@ -6,7 +6,7 @@
                 <button v-if="editable" @click="state = 'editing'" class="ml-2 mt-1 mb-auto text-blue hover:text-blue-dark text-sm">Edit</button>
             </div>
             <div class="text-grey text-xs">
-                <p><span class="mx-1 text-xs">&bull;</span>{{ comment.created_at | moment("MMMM Do")}}</p>
+                <p><span class="mx-1 text-xs">&bull;</span>{{ comment.created_at | moment("MMMM Do")}} <span v-if="comment.video_url">- <a :href="comment.video_url" target="_blank">Video</a></span></p>
             </div>
         </div>
 
@@ -17,6 +17,10 @@
             <textarea v-model="data.body"
                       placeholder="Update comment"
                       class="bg-grey-lighter rounded leading-normal resize-none w-full h-24 py-2 px-3">
+            </textarea>
+            <textarea v-model="data.video_url"
+                      placeholder="Update video link"
+                      class="bg-grey-lighter rounded leading-normal resize-none w-full h-10 py-2 px-3">
             </textarea>
             <div class="flex flex-col md:flex-row items-center mt-2">
                 <button class="border border-blue bg-blue text-white hover:bg-blue-dark py-2 px-4 rounded tracking-wide mb-2 md:mb-0 md:mr-1" @click="saveEdit">Update</button>
@@ -40,6 +44,7 @@
                 state: 'default',
                 data: {
                     body: this.comment.body,
+                    video_url: this.comment.video_url
                 }
           }
         },
@@ -47,12 +52,14 @@
             resetEdit() {
                 this.state = 'default'
                 this.data.body = this.comment.body
+                this.data.video_url = this.comment.video_url
             },
             saveEdit() {
                 this.state = 'default';
                 this.$emit('comment-updated', {
                     'id': this.comment.id,
                     'body': this.data.body,
+                    'video_url': this.data.video_url,
                 });
             },
             deleteComment() {
